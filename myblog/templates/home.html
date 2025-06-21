@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Abhiram's Blog</h1>
+    <h1>Nerds's Blogs</h1>
     <ul>
         {% for post in object_list %}
         <li>
-            <a href="{% url 'article-view' post.pk %}">{{ post.title }}</a> - {{ post.author.first_name }} {{ post.author.last_name }} 
+            <a href="{% url 'article-view' post.pk %}">{{ post.title }}</a> - {{ post.category }} - {{ post.author.first_name }} {{ post.author.last_name }} 
             {% if user.is_authenticated %}
                 - <small><a href="{% url 'edit-post' post.pk %}">Edit</a></small>
             {% endif %}
             <small>
                 <br>
-                {{ post.body|slice:":150" }}
+                {{ post.body|slice:":150"|safe }}
             </small>
         </li>
     {% endfor %}
