@@ -6,15 +6,21 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-        <h1>Edit Blog Post</h1>
-        <br><br>
-        <div class="form-group">
-            <form method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button class="btn btn-secondary">Update</button>
-            </form>
-        </div>
+        {% if user.id == post.author.id%}
+            <h1>Edit Blog Post</h1>
+            <br><br>
+            <div class="form-group">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn btn-secondary">Update</button>
+                </form>
+            </div>
+        {% else %}
+            This Post was made by {{ post.author.first_name }} {{ post.author.last_name }}
+            <br>
+            Only the author of this post can edit it.
+        {% endif %}
     {% else %}
         You are not allowed here! (and you know it...)
     {% endif %}

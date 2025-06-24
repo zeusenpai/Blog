@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if category_posts %}
+        <h1>{{ cats }}</h1>
+        <ul>
+        {% for post in category_posts %}
+            <li>
+                <a href="{% url 'article-view' post.pk %}">{{ post.title }}</a> - {{ post.author.first_name }} {{ post.author.last_name }} 
+                {% if user.is_authenticated %}
+                {% endif %}
+                <small>
+                    <br>
+                    {{ post.body|slice:":150"|safe }}
+                </small>
+            </li>
+        {% endfor %}
+        </ul>
+        <br><br>
+        <a href="{% url 'category-list' %}" class="btn btn-secondary">Back</a>
+    {% else %}
+        404 page not found.
+    {% endif %}
+{% endblock %}

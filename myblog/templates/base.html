@@ -15,7 +15,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
+                    <li class="nav-item">
+                            <a class="nav-link" href="{% url 'category-list' %}">Categories</a>
+                    </li>  
                     {% if user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'create-view' %}">Create Post</a>
@@ -36,13 +38,27 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'login' %}">Login</a>
                         </li>
-                    {% endif %}               
+                    {% endif %}      
                 </ul>
             </div>
         </div>
     </nav>
     <br>
     <div class="container">
+        <!--
+        <h5>Blog Categories:</h5>
+        {% if cat_menu %}
+        <div class="btn-group" role="group" aria-label="Basic outlined example">
+            {% for cat in cat_menu %}
+            <form method="post" action="{% url 'category' cat|slugify %}">
+                {% csrf_token %}
+                <button type="button submit" class="btn btn-outline-secondary">{{ cat }}</button>
+            </form>
+            {% endfor %}
+        </div>
+        {% endif %}
+    <br>
+    -->
         {% block content %}
         {% endblock %}
     </div>
